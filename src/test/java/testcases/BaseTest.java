@@ -1,6 +1,7 @@
+package testcases;
+
 import io.appium.java_client.android.AndroidDriver;
-import org.junit.After;
-import org.junit.Before;
+import org.testng.annotations.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -9,7 +10,7 @@ import java.net.URL;
 public class BaseTest {
     public AndroidDriver driver;
 
-    @Before
+    @BeforeMethod
     public void setUpAppium () throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setDesiredCapabilitiesForAndroid(capabilities);
@@ -30,11 +31,11 @@ public class BaseTest {
         System.out.println("Application Started...");
 
     }
-   /* @After
+    @AfterMethod
     public void quitDriver(){
         if(driver!= null)
         driver.quit();
-    }*/
+    }
 
 
 }
