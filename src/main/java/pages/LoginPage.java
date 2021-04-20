@@ -4,6 +4,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.By;
 
 public class LoginPage{
     private AndroidDriver<AndroidElement> driver;
@@ -17,12 +18,14 @@ public class LoginPage{
     MobileBy nextbutton = new MobileBy.ByAccessibilityId("work-email-button");
     MobileBy passwordInput = new MobileBy.ByAccessibilityId("password-field");
     MobileBy logInButton = new MobileBy.ByAccessibilityId("login-button");
+    MobileBy invalidEmail = new MobileBy.ByAccessibilityId("work-email-field-error");
+    MobileBy invalidPassword = new MobileBy.ByAccessibilityId("password-field-error");
+
 
     public void clickSignInManuallyButton(){
 
         MobileElement signInManually = driver.findElement(manuallySignInButton);
         signInManually.click();
-
     }
     public void enterEmail(String email){
 
@@ -44,10 +47,13 @@ public class LoginPage{
         MobileElement loginButton = driver.findElement(logInButton);
         loginButton.click();
     }
-    public String getMenuButtonText(){
-
-        MobileElement menuButton = driver.findElementByAccessibilityId("menu-button");
-        return menuButton.getText();
+    public String invalidEmailMessage(){
+        MobileElement message = driver.findElement(invalidEmail);
+        return message.getText();
+    }
+    public String incorrectPasswordMessage(){
+        MobileElement message = driver.findElement(invalidPassword);
+        return message.getText();
     }
     public void positiveLogin(String email, String password){
         clickSignInManuallyButton();
@@ -55,6 +61,21 @@ public class LoginPage{
         clickNextButton();
         enterPassword(password);
         clickLoginButton();
-      //getMenuButtonText();
+    }
+    public void invalidEmailLogin(String email){
+        clickSignInManuallyButton();
+        enterEmail(email);
+    }
+    public void unregisteredEmailLogin(String email){
+        clickSignInManuallyButton();
+        enterEmail(email);
+        clickNextButton();
+    }
+    public void incorrectPasswordLogin(String email, String password){
+        clickSignInManuallyButton();
+        enterEmail(email);
+        clickNextButton();
+        enterPassword(password);
+        clickLoginButton();
     }
 }
